@@ -1,11 +1,14 @@
+from itertools import chain
+
 import matplotlib.pyplot as plt
 import cv2
+import numpy as np
 
 
 def generate_image_histogram(img):
-    return cv2.calcHist([img], [0], None, [256], [0, 256])
+    return np.histogram(img)
 
 
 def plot_image_histogram(img):
-    plt.plot(generate_image_histogram(img))
+    plt.hist(list(chain.from_iterable(img)))
     plt.show()
