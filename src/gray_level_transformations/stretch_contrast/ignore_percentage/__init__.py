@@ -1,9 +1,10 @@
+import src.img_ops
 from src.img_ops import get_shape
 from src.image_histogram import generate_image_histogram
 
 
 def ignore_percentage(img, percent):
-    n_pixels_to_ignore = int(percent * get_shape.get_shape(img)[get_shape.PX_COUNT])
+    n_pixels_to_ignore = int(percent * src.img_ops.get_shape(img)[get_shape.PX_COUNT])
     hist = generate_image_histogram(img)
     min_quota = n_pixels_to_ignore
     min_level = 0

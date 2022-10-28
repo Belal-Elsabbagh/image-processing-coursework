@@ -1,22 +1,10 @@
-import numpy as np
-
-from src import BLACK, PEAK_INTENSITY
+import src.img_ops
 from src.img_ops import get_shape
-
-
-def quantize(r):
-    if r < BLACK:
-        return BLACK
-    if r > PEAK_INTENSITY:
-        return PEAK_INTENSITY
-    return int(r)
+from src.img_ops.quantize_intensity import quantize_intensity
 
 
 def base_transform(img, transformation_function, *args):
-    img_shape = get_shape.get_shape(img)
+    img_shape = src.img_ops.get_shape(img)
     height, width = img_shape[get_shape.HEIGHT], img_shape[get_shape.WIDTH]
-    new_img = np.full((height, width), BLACK, dtype=np.uint8)
-    for row in range(height):
-        for pixel in range(width):
-            new_img[row][pixel] = quantize(transformation_function(img[row][pixel], *args))
-    return new_img
+    return [[quantize_intensity(transformation_function(img[row][pixel], *args)) for pixel, val in range(width)]
+            for row in range(height)]
