@@ -16,16 +16,19 @@ class ArithmeticMeanFilter(BaseFilter):
 
 
 class ContraharmonicMeanFilter(BaseFilter):
-    def __init__(self, img, window_len):
+    exponent = 2
+
+    def __init__(self, img, window_len, q):
         super().__init__(img, window_len)
+        self.exponent = q
 
     @staticmethod
-    def __contraharmonic_mean(_data_list, exponent=2):
-        return np.sum([i**(exponent+1) for i in _data_list]) / np.sum([i ** exponent for i in _data_list])
+    def __contraharmonic_mean(_data_list, _exponent):
+        return np.sum([i**(_exponent+1) for i in _data_list]) / np.sum([i ** _exponent for i in _data_list])
 
     def convulse(self, _pixels):
         pixels = list(chain.from_iterable(_pixels))
-        return ContraharmonicMeanFilter.__contraharmonic_mean(pixels)
+        return ContraharmonicMeanFilter.__contraharmonic_mean(pixels, self.exponent)
 
 
 class GeometricMeanFilter(BaseFilter):

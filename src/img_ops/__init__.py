@@ -22,3 +22,14 @@ def read_img_color(file_path):
 
 def read_img_grayscale(file_path):
     return read_img(file_path, cv2.IMREAD_GRAYSCALE)
+
+
+def show_img(window_name, img):
+    cv2.imshow(window_name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    return None
+
+
+def save_img(file_path, img):
+    return cv2.imwrite(file_path, img)

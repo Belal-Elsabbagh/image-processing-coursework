@@ -19,3 +19,6 @@ def scale_img(img, scale_coefficient: float):
     height = int(img.shape[0] * scale_coefficient)
     dim = (width, height)
     return cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
+
+def resize_img(img, width, height):
+    return cv2.resize(img, (width, height), interpolation=cv2.INTER_AREA)
